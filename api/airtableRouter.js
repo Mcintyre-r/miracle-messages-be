@@ -9,9 +9,15 @@ router.get("/update", async (req, res) => {
 });
 
 router.get("/get", (req, res) => {
-  airDB.get().then((records) => {
-    res.status(201).json(records);
-  });
+  airDB
+    .get()
+    .then((records) => {
+      res.status(201).json(records);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ error });
+    });
 });
 
 router.get("/del", (req, res) => {
