@@ -7,7 +7,7 @@ const asyncForEach = async (array, callback) => {
   }
 };
 function Records() {
-  var base = new Airtable({ apiKey: "keyWYkAWkZFab8hog" }).base(
+  var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
     "appZsM9RmLGlwJqx0"
   );
   base("Imported table")
