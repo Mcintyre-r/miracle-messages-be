@@ -30,9 +30,10 @@ router.get("/", async (req, res) => {
     });
 
     Promise.all(newChapters).then((values) => res.status(200).json(values));
-  } catch {
+  } catch (error) {
     res.status(500).json({
-      error: "there was a problem getting chapter",
+      error,
+      Message: "there was a problem getting chapter",
     });
   }
 });
