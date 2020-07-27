@@ -1,4 +1,4 @@
-const Airtable = require("Airtable");
+const Airtable = require("airtable");
 const airDB = require("../models/airtable-model");
 const axios = require("axios");
 const asyncForEach = async (array, callback) => {
