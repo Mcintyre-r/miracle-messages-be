@@ -1,6 +1,7 @@
 const Airtable = require("airtable");
 const airDB = require("../models/airtable-model");
 const axios = require("axios");
+const randomGeo = require("../utils/randomGeo");
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
@@ -8,7 +9,7 @@ const asyncForEach = async (array, callback) => {
 };
 function Records() {
   var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
-    "appZsM9RmLGlwJqx0"
+    "app31LZ0C4agHIxXz"
   );
   base("Imported table")
     .select({
@@ -19,6 +20,7 @@ function Records() {
         "Loved One Last Known Location",
         "Client Current City",
         "Link to the MM (YouTube)",
+        "Attachments/Client Photo",
       ],
       filterByFormula:
         "AND(NOT({OUTCOME: REUNION STORY}=''), NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
@@ -79,10 +81,14 @@ function Records() {
           if (destCord.length > 0) {
             newReunion.destLatitude = destCord[1];
             newReunion.destLongitude = destCord[0];
+            newReunion = randomGeo(newReunion, 2000);
           }
           if (record.fields["Link to the MM (YouTube)"]) {
             newReunion.link_to_media =
               record.fields["Link to the MM (YouTube)"];
+          }
+          if (record.fields["Attachments/Client Photo"]) {
+            newReunion.photo = record.fields["Attachments/Client Photo"];
           }
           await airDB.update(newReunion);
         });

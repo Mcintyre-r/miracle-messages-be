@@ -10,6 +10,11 @@ exports.up = function (knex) {
     tbl.double("destLatitude").notNullable();
     tbl.text("story").notNullable();
     tbl.string("link_to_media").defaultTo("https://youtu.be/8vcmuC_D-p0");
+    tbl
+      .string("photo")
+      .defaultTo(
+        "https://images.squarespace-cdn.com/content/5e98c388f5b32f0d7b5e23f3/1587070068447-WK2DOCU06NE70HIVU6F2/MM_Logo_Website_Large.png?content-type=image%2Fpng"
+      );
   });
 };
 
