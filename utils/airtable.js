@@ -24,7 +24,7 @@ function Records() {
       ],
       filterByFormula:
         "AND(NOT({OUTCOME: REUNION STORY}=''), NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
-      view: "Grid view",
+      // view: "Grid view",
     })
     .eachPage(
       function page(records, fetchNextPage) {
