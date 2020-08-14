@@ -11,7 +11,7 @@ function Records() {
   var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
     "app31LZ0C4agHIxXz"
   );
-  base("All case view-alternate")
+  base("Miracle Messages Cases")
     .select({
       // maxRecords: 3,
       fields: [
