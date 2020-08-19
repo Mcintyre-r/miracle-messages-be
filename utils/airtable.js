@@ -92,8 +92,11 @@ function Records() {
               record.fields["Link to the MM (YouTube)"];
           }
           if (record.fields["Attachments/Client Photo"]) {
-            newReunion.photo =
-              record.fields["Attachments/Client Photo"][0]["url"];
+            const photo = record.fields["Attachments/Client Photo"][0]["url"];
+            const check = photo.split("/");
+            if (check[check.length - 1] != "GalleryPlaceholder.jpg") {
+              newReunion.photo = photo;
+            }
           }
           // console.log(newReunion);
           await airDB.update(newReunion);
