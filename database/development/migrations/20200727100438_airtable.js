@@ -9,7 +9,7 @@ exports.up = function (knex) {
     tbl.double("destLongitude").notNullable();
     tbl.double("destLatitude").notNullable();
     tbl.text("story").notNullable();
-    tbl.string("link_to_media").defaultTo("https://youtu.be/8vcmuC_D-p0");
+    tbl.string("link_to_media");
     tbl
       .string("photo")
       .defaultTo(
