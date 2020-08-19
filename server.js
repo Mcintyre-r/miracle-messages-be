@@ -15,7 +15,7 @@ const pendingRouter = require("./api/pendingRouter");
 const airtableRouter = require("./api/airtableRouter.js");
 const cron = require("node-cron");
 
-cron.schedule("20 * * * * *", () => {
+cron.schedule("* 23 * * *", () => {
   airDB.del().then((res) => Records());
   console.log("minute");
 });
