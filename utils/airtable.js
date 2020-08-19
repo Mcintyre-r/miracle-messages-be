@@ -98,7 +98,6 @@ function Records() {
               newReunion.photo = photo;
             }
           }
-          // console.log(newReunion);
           await airDB.update(newReunion);
         });
         fetchNextPage();
