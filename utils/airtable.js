@@ -94,8 +94,8 @@ function Records() {
             newReunion.photo =
               record.fields["Attachments/Client Photo"][0]["url"];
           }
-          console.log(newReunion);
-          // await airDB.update(newReunion);
+          // console.log(newReunion);
+          await airDB.update(newReunion);
         });
         fetchNextPage();
       },
