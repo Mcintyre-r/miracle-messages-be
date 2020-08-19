@@ -82,8 +82,8 @@ function Records() {
             newReunion.originLongitude = originCord[0];
           }
           if (destCord.length > 0) {
-            newReunion.destLatitude = destCord[1];
-            newReunion.destLongitude = destCord[0];
+            newReunion.destlatitude = destCord[1];
+            newReunion.destlongitude = destCord[0];
             newReunion = randomGeo(newReunion, 2000);
           }
           if (record.fields["Link to the MM (YouTube)"]) {
@@ -94,7 +94,8 @@ function Records() {
             newReunion.photo =
               record.fields["Attachments/Client Photo"][0]["url"];
           }
-          await airDB.update(newReunion);
+          console.log(newReunion);
+          // await airDB.update(newReunion);
         });
         fetchNextPage();
       },
