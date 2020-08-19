@@ -43,6 +43,7 @@ function Records() {
           newReunion.destination = newReunion.destination.replace(";", " ");
           newReunion.destination = newReunion.destination.replace("#", " ");
           newReunion.destination = newReunion.destination.replace(".", " ");
+          newReunion.destination = newReunion.destination.replace("*", " ");
           newReunion.destination = newReunion.destination.replace(/\//g, " ");
           if (newReunion.destination.includes("Schererville")) {
             newReunion.destination = "Schererville,IN";

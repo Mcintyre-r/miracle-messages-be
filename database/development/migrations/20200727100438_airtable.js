@@ -13,7 +13,7 @@ exports.up = function (knex) {
     tbl
       .string("photo")
       .defaultTo(
-        "https://images.squarespace-cdn.com/content/5e98c388f5b32f0d7b5e23f3/1587070068447-WK2DOCU06NE70HIVU6F2/MM_Logo_Website_Large.png?content-type=image%2Fpng"
+        "https://static1.squarespace.com/static/5e98c388f5b32f0d7b5e23f3/t/5ea0cdecb7903837378e7892/1587596784243/juanita.jpg?format=1500w"
       );
   });
 };
