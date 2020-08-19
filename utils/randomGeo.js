@@ -1,6 +1,6 @@
 module.exports = function randomGeo(center, radius) {
-  var y0 = parseFloat(center.destlatitude);
-  var x0 = parseFloat(center.destlongitude);
+  var y0 = parseFloat(center.destLatitude);
+  var x0 = parseFloat(center.destLongitude);
   var rd = radius / 111300;
 
   var u = Math.random();
@@ -11,5 +11,5 @@ module.exports = function randomGeo(center, radius) {
   var x = w * Math.cos(t);
   var y = w * Math.sin(t);
 
-  return (center = { ...center, destlatitude: y + y0, destlongitude: x + x0 });
+  return (center = { ...center, destLatitude: y + y0, destLongitude: x + x0 });
 };
