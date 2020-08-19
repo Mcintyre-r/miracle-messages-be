@@ -7,8 +7,9 @@ const asyncForEach = async (array, callback) => {
     await callback(array[index], index, array);
   }
 };
+// process.env.AIRTABLE_API
 function Records() {
-  var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
+  var base = new Airtable({ apiKey: "keyiokpwA8U49eeG1" }).base(
     "app31LZ0C4agHIxXz"
   );
   base("Miracle Messages Cases")
@@ -21,6 +22,7 @@ function Records() {
         "Client Current City",
         "Link to the MM (YouTube)",
         "Attachments/Client Photo",
+        "SUBMISSION INFO: CITY",
       ],
       filterByFormula:
         "AND(NOT({OUTCOME: REUNION STORY}=''), NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
@@ -28,12 +30,13 @@ function Records() {
     })
     .eachPage(
       function page(records, fetchNextPage) {
-        newReunion = {};
+        // newReunion = {};
         asyncForEach(records, async (record) => {
+          // console.log(record.fields["SUBMISSION INFO: CITY"][0]);
           newReunion = {};
           newReunion.title = record.fields["CASE RECORD"];
           newReunion.story = record.fields["OUTCOME: REUNION STORY"];
-          newReunion.origin = record.fields["Client Current City"];
+          newReunion.origin = record.fields["SUBMISSION INFO: CITY"][0];
           newReunion.destination = record.fields[
             "Loved One Last Known Location"
           ].replace("?", " ");
@@ -88,7 +91,8 @@ function Records() {
               record.fields["Link to the MM (YouTube)"];
           }
           if (record.fields["Attachments/Client Photo"]) {
-            newReunion.photo = record.fields["Attachments/Client Photo"];
+            newReunion.photo =
+              record.fields["Attachments/Client Photo"][0]["url"];
           }
           await airDB.update(newReunion);
         });
