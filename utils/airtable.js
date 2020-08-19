@@ -9,7 +9,7 @@ const asyncForEach = async (array, callback) => {
 };
 // process.env.AIRTABLE_API
 function Records() {
-  var base = new Airtable({ apiKey: "keyiokpwA8U49eeG1" }).base(
+  var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
     "app31LZ0C4agHIxXz"
   );
   base("Miracle Messages Cases")
