@@ -7,11 +7,6 @@ const cors = require("cors");
 const helmet = require("helmet");
 const Records = require("./utils/airtable");
 const airDB = require("./models/airtable-model");
-const chaptersRouter = require("./api/chapterRouter.js");
-const reunionRouter = require("./api/reunionRouter");
-const volunteerRouter = require("./api/volunteerRouter");
-const userRouter = require("./api/userRouter.js");
-const pendingRouter = require("./api/pendingRouter");
 const airtableRouter = require("./api/airtableRouter.js");
 const cron = require("node-cron");
 
@@ -44,11 +39,6 @@ server.get("/", (req, res) => {
   res.status(200).json({ hello: "World!" });
 });
 server.use("/api/airtable", airtableRouter);
-server.use("/api/user", userRouter);
-server.use("/api/chapter", chaptersRouter);
-server.use("/api/reunion", reunionRouter);
-server.use("/api/volunteer", volunteerRouter);
-server.use("/api/pending", pendingRouter);
 
 // custom logging function
 function logger(req, res, next) {

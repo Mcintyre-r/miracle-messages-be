@@ -2,58 +2,56 @@ const Airtable = require("airtable");
 const airDB = require("../models/airtable-model");
 const axios = require("axios");
 const randomGeo = require("../utils/randomGeo");
+
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
   }
 };
-// process.env.AIRTABLE_API
+
 function Records() {
   var base = new Airtable({ apiKey: process.env.AIRTABLE_API }).base(
     "app31LZ0C4agHIxXz"
   );
-  base("Miracle Messages Cases")
+  base("All Reunions (CSC and FT)")
     .select({
       // maxRecords: 3,
       fields: [
         "CASE RECORD",
-        "OUTCOME: REUNION STORY",
+        "Reunion Story",
         "Loved One Last Known Location",
-        "Client Current City",
         "Link to the MM (YouTube)",
         "Attachments/Client Photo",
         "SUBMISSION INFO: CITY",
       ],
       filterByFormula:
-        "AND(NOT({OUTCOME: REUNION STORY}=''), NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
-      // view: "Grid view",
+        "AND(NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
+      view: "Reunion view",
     })
     .eachPage(
       function page(records, fetchNextPage) {
-        // newReunion = {};
         asyncForEach(records, async (record) => {
-          // console.log(record.fields["SUBMISSION INFO: CITY"][0]);
           newReunion = {};
           newReunion.title = record.fields["CASE RECORD"];
-          newReunion.story = record.fields["OUTCOME: REUNION STORY"];
           newReunion.origin = record.fields["SUBMISSION INFO: CITY"][0];
-          newReunion.destination = record.fields[
-            "Loved One Last Known Location"
-          ].replace("?", " ");
-          newReunion.destination = newReunion.destination.replace(";", " ");
-          newReunion.destination = newReunion.destination.replace("#", " ");
-          newReunion.destination = newReunion.destination.replace(".", " ");
-          newReunion.destination = newReunion.destination.replace("*", " ");
-          newReunion.destination = newReunion.destination.replace(/\//g, " ");
-          if (newReunion.destination.includes("Schererville")) {
-            newReunion.destination = "Schererville,IN";
-          }
-          if (newReunion.destination.includes("Littleton")) {
-            newReunion.destination = "Littleton,CO";
-          }
-          if (newReunion.destination.includes("Birmingham")) {
-            newReunion.destination = "Birmingham, AL";
-          }
+          newReunion.destination =
+            record.fields["Loved One Last Known Location"];
+          newReunion.destination = newReunion.destination.replace(
+            /[^\w\s]/gi,
+            " "
+          );
+          fixes = [
+            "UNKNOWN",
+            "NOT GIVEN",
+            "NOT SURE",
+            "FIND THEM",
+            "ON THE WEBAPP",
+          ];
+          fixes.forEach((word) => {
+            if (newReunion.destination.includes(word)) {
+              newReunion.destination = newReunion.origin;
+            }
+          });
           const originCord = await axios
             .get(
               `https://api.mapbox.com/geocoding/v5/mapbox.places/${newReunion.origin}.json?access_token=${process.env.MAPBOX_API}`
@@ -91,6 +89,9 @@ function Records() {
             newReunion.link_to_media =
               record.fields["Link to the MM (YouTube)"];
           }
+          if (record.fields["Reunion Story"]) {
+            newReunion.story = record.fields["Reunion Story"];
+          }
           if (record.fields["Attachments/Client Photo"]) {
             const photo = record.fields["Attachments/Client Photo"][0]["url"];
             const check = photo.split("/");
@@ -98,6 +99,7 @@ function Records() {
               newReunion.photo = photo;
             }
           }
+          // console.log(newReunion);
           await airDB.update(newReunion);
         });
         fetchNextPage();
