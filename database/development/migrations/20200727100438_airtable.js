@@ -8,7 +8,7 @@ exports.up = function (knex) {
     tbl.string("destination", 128).notNullable();
     tbl.double("destLongitude").notNullable();
     tbl.double("destLatitude").notNullable();
-    tbl.text("story").notNullable();
+    tbl.text("story");
     tbl.string("link_to_media");
     tbl
       .string("photo")
