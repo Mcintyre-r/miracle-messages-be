@@ -15,7 +15,7 @@ function Records() {
   );
   base("All Reunions (CSC and FT)")
     .select({
-      // maxRecords: 3,
+      // maxRecords: 100,
       fields: [
         "CASE RECORD",
         "Reunion Story",
@@ -102,7 +102,7 @@ function Records() {
           // console.log(newReunion);
           await airDB.update(newReunion);
         });
-        fetchNextPage();
+        // fetchNextPage();
       },
       function done(err) {
         if (err) {
