@@ -101,7 +101,7 @@ function Records() {
           }
           // console.log(newReunion);
           await airDB.update(newReunion);
-        });
+        }).then((e) => fetchNextPage());
         // fetchNextPage();
       },
       function done(err) {
