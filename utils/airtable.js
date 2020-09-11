@@ -26,7 +26,7 @@ function Records() {
       ],
       filterByFormula:
         "AND(NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
-      view: "Reunion view",
+      view: "All Miracle Messages Reunions!!",
     })
     .eachPage(
       function page(records, fetchNextPage) {
