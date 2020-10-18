@@ -10,7 +10,7 @@ const airDB = require("./models/airtable-model");
 const airtableRouter = require("./api/airtableRouter.js");
 const cron = require("node-cron");
 
-cron.schedule("* 23 * * 0", () => {
+cron.schedule("0 0 23 * * 0", () => {
   airDB.del().then((res) => Records());
   console.log("minute");
 });
