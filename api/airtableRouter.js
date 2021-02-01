@@ -31,7 +31,7 @@ router.get("/count", (req, res) => {
     .get()
     .then(records => {
       const count = records.length
-      res.status(201).json('This many' + count)
+      res.status(201).json({ 'Current Record Count': count, records })
     })
 })
 
