@@ -26,4 +26,13 @@ router.get("/del", (req, res) => {
   });
 });
 
+router.get("/count", (req, res) => {
+  airDB
+    .get()
+    .then(records => {
+      const count = records.length
+      res.status(201).json('This many' + count)
+    })
+})
+
 module.exports = router;
