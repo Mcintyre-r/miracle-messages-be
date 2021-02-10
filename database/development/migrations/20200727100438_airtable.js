@@ -3,6 +3,7 @@ exports.up = function (knex) {
     tbl.increments();
     tbl.string("title", 128).notNullable();
     tbl.string("origin", 128).notNullable();
+    tbl.string("date", 128).notNullable();
     tbl.double("originLongitude").notNullable();
     tbl.double("originLatitude").notNullable();
     tbl.string("destination", 128).notNullable();

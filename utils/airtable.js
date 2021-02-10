@@ -23,6 +23,7 @@ function Records() {
         "Link to the MM (YouTube)",
         "Attachments/Client Photo",
         "SUBMISSION INFO: CITY",
+        "SUBMISSION INFO: DATE"
       ],
       filterByFormula:
         "AND(NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
@@ -34,6 +35,7 @@ function Records() {
           newReunion = {};
           newReunion.title = record.fields["CASE RECORD"];
           newReunion.origin = record.fields["SUBMISSION INFO: CITY"][0];
+          newReunion.date = record.fields["SUBMISSION INFO: DATE"];
           newReunion.destination =
             record.fields["Loved One Last Known Location"];
           newReunion.destination = newReunion.destination.replace(
