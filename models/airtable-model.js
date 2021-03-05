@@ -7,7 +7,8 @@ function update(reunion) {
 }
 
 function get() {
-  return db("airtable");
+  return db("airtable")
+    .orderBy('date');
 }
 
 function del() {
