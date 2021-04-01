@@ -52,7 +52,7 @@ module.exports = {
     client: "pg",
     useNullAsDefault: true,
 
-    connection: { connectionString: process.env.DATABASE_URL, ssl: true },
+    connection: { connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } },
 
     migrations: {
       directory: "./database/development/migrations",
