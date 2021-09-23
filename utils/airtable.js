@@ -26,7 +26,7 @@ function Records() {
         "SUBMISSION INFO: DATE"
       ],
       filterByFormula:
-        "AND(NOT({Client Current City}=''), NOT({Loved One Last Known Location}=''))",
+        "AND(NOT({SUBMISSION INFO: CITY}=''), NOT({Loved One Last Known Location}=''))",
       view: "All Miracle Messages Reunions!!",
     })
     .eachPage(
