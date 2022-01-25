@@ -36,6 +36,7 @@ function Records() {
           newReunion.title = record.fields["CASE RECORD"];
           newReunion.origin = record.fields["SUBMISSION INFO: CITY"][0];
           newReunion.date = record.fields["SUBMISSION INFO: DATE"];
+          console.log(record.fields["SUBMISSION INFO: DATE"])
           newReunion.destination =
             record.fields["Loved One Last Known Location"];
           newReunion.destination = newReunion.destination.replace(
